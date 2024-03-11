@@ -1,0 +1,597 @@
+{
+    "name": "Esenario 1",
+    "flow": [
+        {
+            "id": 4,
+            "module": "google-sheets:listSheets",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 2274433
+            },
+            "mapper": {
+                "select": "map",
+                "spreadsheetId": "/18Eeokw1XM2R5N9dIAIY6Wmzu59J3tpkdi5stIWd5Zok"
+            },
+            "metadata": {
+                "designer": {
+                    "x": -300,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "select": {
+                            "label": "Enter manually"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "My Google connection (gustavo.cerdena@utec.edu.uy)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Enter a Spreadsheet ID",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "map",
+                                "fromAll",
+                                "list"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "text",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "google-sheets:filterRows",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 2274433
+            },
+            "mapper": {
+                "from": "drive",
+                "limit": "{{4.gridProperties.rowCount}}",
+                "sheetId": "{{4.title}}",
+                "sortOrder": "asc",
+                "spreadsheetId": "18Eeokw1XM2R5N9dIAIY6Wmzu59J3tpkdi5stIWd5Zok",
+                "tableFirstRow": "A1:Z1",
+                "includesHeaders": true,
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 78,
+                    "y": 6
+                },
+                "restore": {
+                    "expect": {
+                        "from": {
+                            "label": "Select from My Drive"
+                        },
+                        "orderBy": {
+                            "mode": "chose"
+                        },
+                        "sheetId": {
+                            "mode": "edit"
+                        },
+                        "sortOrder": {
+                            "mode": "chose",
+                            "label": "Ascending"
+                        },
+                        "spreadsheetId": {
+                            "mode": "edit"
+                        },
+                        "tableFirstRow": {
+                            "label": "A-Z"
+                        },
+                        "includesHeaders": {
+                            "mode": "chose",
+                            "label": "Yes"
+                        },
+                        "valueRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted value"
+                        },
+                        "dateTimeRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted string"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "My Google connection (gustavo.cerdena@utec.edu.uy)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Enter a Spreadsheet ID and Sheet Name",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "number",
+                        "label": "Maximum number of returned rows"
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "select",
+                        "label": "Spreadsheet",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1",
+                                "A1:AZZ1",
+                                "A1:BZZ1",
+                                "A1:CZZ1",
+                                "A1:DZZ1",
+                                "A1:MZZ1",
+                                "A1:ZZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://google-sheets/2/rpcGetFilterKeys?includesHeaders=true"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 8,
+            "module": "regexp:GetElementsFromText",
+            "version": 1,
+            "parameters": {
+                "continueWhenNoRes": false
+            },
+            "filter": {
+                "name": "",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{5.`0`}}",
+                            "o": "exist"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "text": "{{5.`0`}}",
+                "pattern": "##emails",
+                "specialCharsPattern": ""
+            },
+            "metadata": {
+                "designer": {
+                    "x": 554,
+                    "y": 8
+                },
+                "restore": {
+                    "expect": {
+                        "pattern": {
+                            "label": "Email"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "continueWhenNoRes",
+                        "type": "boolean",
+                        "label": "Continue the execution of the route even if the module finds no matches",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "pattern",
+                        "type": "select",
+                        "label": "Pattern",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "##emails",
+                                "##html_tags",
+                                "##http_urls",
+                                "##ftp_urls",
+                                "##telephone_numbers",
+                                "##ipv4",
+                                "##ipv6",
+                                "##emoji",
+                                "##key_value_pairs"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "text",
+                        "type": "text",
+                        "label": "Text",
+                        "required": true
+                    },
+                    {
+                        "name": "specialCharsPattern",
+                        "type": "text",
+                        "label": "Special characters in the pattern"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "match",
+                        "type": "any",
+                        "label": "Match"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "module": "email:ActionSendEmail",
+            "version": 7,
+            "parameters": {
+                "account": 2274496,
+                "saveAfterSent": false
+            },
+            "mapper": {
+                "cc": [],
+                "to": [
+                    "{{8.match}}"
+                ],
+                "bcc": [],
+                "from": "",
+                "text": "¡Estimados, muy buenos días!\n\nLes agradecemos por participar del taller y queremos que nos den su opinión sobre el a través de este formulario.\n\nhttps://forms.gle/MirJbXubL67BJEbdA\n\nDesde ya muchas gracias",
+                "sender": "",
+                "headers": [],
+                "replyTo": "",
+                "subject": "Formulario de Taller",
+                "priority": "normal",
+                "inReplyTo": "",
+                "references": [],
+                "attachments": [],
+                "contentType": "text"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1039,
+                    "y": 22
+                },
+                "restore": {
+                    "expect": {
+                        "cc": {
+                            "mode": "chose"
+                        },
+                        "to": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "bcc": {
+                            "mode": "chose"
+                        },
+                        "priority": {
+                            "label": "Normal"
+                        },
+                        "references": {
+                            "mode": "chose"
+                        },
+                        "attachments": {
+                            "mode": "chose"
+                        },
+                        "contentType": {
+                            "label": "Plaintext"
+                        }
+                    },
+                    "parameters": {
+                        "account": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            },
+                            "label": "My Google Restricted connection (gustavo.cerdena@utec.edu.uy)"
+                        },
+                        "saveAfterSent": {
+                            "label": "No"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "type": "account:smtp,google-restricted,microsoft-smtp-imap",
+                        "label": "Connection",
+                        "required": true
+                    },
+                    {
+                        "name": "saveAfterSent",
+                        "type": "select",
+                        "label": "Save message after sending",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "to",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        },
+                        "type": "array",
+                        "label": "To",
+                        "required": true
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "contentType",
+                        "type": "select",
+                        "label": "Content Type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "html",
+                                "text"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "attachments",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "type": "filename",
+                                "label": "File name",
+                                "required": true,
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "type": "buffer",
+                                "label": "Data",
+                                "required": true,
+                                "semantic": "file:data"
+                            },
+                            {
+                                "name": "cid",
+                                "type": "text",
+                                "label": "Content-ID"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Attachments"
+                    },
+                    {
+                        "name": "cc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Copy recipient"
+                    },
+                    {
+                        "name": "bcc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Blind copy recipient"
+                    },
+                    {
+                        "name": "from",
+                        "type": "text",
+                        "label": "From"
+                    },
+                    {
+                        "name": "sender",
+                        "type": "text",
+                        "label": "Sender"
+                    },
+                    {
+                        "name": "replyTo",
+                        "type": "text",
+                        "label": "Reply-To"
+                    },
+                    {
+                        "name": "inReplyTo",
+                        "type": "text",
+                        "label": "In-Reply-To"
+                    },
+                    {
+                        "name": "references",
+                        "spec": {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Reference",
+                            "required": true
+                        },
+                        "type": "array",
+                        "label": "References"
+                    },
+                    {
+                        "name": "priority",
+                        "type": "select",
+                        "label": "Priority",
+                        "validate": {
+                            "enum": [
+                                "high",
+                                "normal",
+                                "low"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "type": "text",
+                                "label": "Key",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value",
+                                "required": true
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "text",
+                        "type": "text",
+                        "label": "Content"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us1.make.com"
+    }
+}
